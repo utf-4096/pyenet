@@ -1,6 +1,6 @@
 from distutils.core import setup
 from distutils.extension import Extension
-from Cython.Distutils import build_ext
+from distutils.core import run_setup
 
 import os
 import glob
@@ -9,6 +9,20 @@ import sys
 source_files = ["enet.pyx"]
 
 _enet_files = glob.glob("enet/*.c")
+lib_version = "1.3.13"
+
+from distutils.command.build_ext import build_ext as _build_ext
+class build_ext(_build_ext):
+    def run(self):
+
+        from Cython.Build import cythonize
+        self.extensions = cythonize(self.extensions)
+
+        _build_ext.run(self)
+
+        extra_args = sys.argv[2:]
+        run_setup(os.path.join(os.getcwd(), "setup.py"), ['build_py'] + extra_args)
+
 
 if not _enet_files:
     import tarfile
@@ -17,7 +31,6 @@ if not _enet_files:
     except ImportError:
         import urllib.request as urllib_request
 
-    lib_version = "1.3.13"
     enet_dir = "enet-%s/" % lib_version
     enet_file = "enet-%s.tar.gz" % lib_version
     enet_url = "http://enet.bespin.org/download/%s" % enet_file
@@ -85,8 +98,8 @@ ext_modules = [
 
 setup(
     name='enet',
+    version=lib_version,
     cmdclass={'build_ext': build_ext},
     ext_modules=ext_modules,
-    setup_requires=['Cython>=0,<1'],
-    install_requires=['Cython>=0,<1'],
+    requires=['Cython'],
 )
