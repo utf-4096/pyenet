@@ -1,4 +1,5 @@
-from distutils.core import setup
+
+from setuptools import setup
 from distutils.extension import Extension
 from distutils.core import run_setup
 
@@ -10,6 +11,7 @@ source_files = ["enet.pyx"]
 
 _enet_files = glob.glob("enet/*.c")
 lib_version = "1.3.13"
+package_version = lib_version + '.post2'
 
 from distutils.command.build_ext import build_ext as _build_ext
 class build_ext(_build_ext):
@@ -97,9 +99,16 @@ ext_modules = [
 ]
 
 setup(
-    name='enet',
-    version=lib_version,
+    name='pyenet',
+    # packages=['enet'],
+    description='A python wrapper for the ENet library',
+    url='https://github.com/piqueserver/pyenet/',
+    maintainer='Andrew Resch, Piqueserver team',
+    maintainer_email='samuel@swalladge.id.au',
+
+    version=package_version,
     cmdclass={'build_ext': build_ext},
     ext_modules=ext_modules,
-    requires=['Cython'],
+    setup_requires=['Cython>=0,<1'],
+    install_requires=['Cython>=0,<1'],
 )
