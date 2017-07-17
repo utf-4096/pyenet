@@ -6,12 +6,24 @@ from distutils.core import run_setup
 import os
 import glob
 import sys
+import re
 
 source_files = ["enet.pyx"]
 
 _enet_files = glob.glob("enet/*.c")
 lib_version = "1.3.13"
-package_version = lib_version + '.post2'
+package_version = lib_version + '.post3'
+
+
+try:
+   import pypandoc
+   long_description = pypandoc.convert_text(
+        re.sub(r'[^\x00-\x7F]+', ' ',
+            pypandoc.convert('README.md', 'markdown', format="markdown_github")), 'rst', format="markdown")
+except (IOError, ImportError):
+    print('pypandoc not available, using plain contents of readme')
+    long_description = re.sub(r'[^\x00-\x7F]+', ' ', open('README.md').read())
+
 
 from distutils.command.build_ext import build_ext as _build_ext
 class build_ext(_build_ext):
@@ -102,6 +114,7 @@ setup(
     name='pyenet',
     # packages=['enet'],
     description='A python wrapper for the ENet library',
+    long_description=long_description,
     url='https://github.com/piqueserver/pyenet/',
     maintainer='Andrew Resch, Piqueserver team',
     maintainer_email='samuel@swalladge.id.au',
