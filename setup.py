@@ -12,7 +12,7 @@ source_files = ["enet.pyx"]
 
 _enet_files = glob.glob("enet/*.c")
 lib_version = "1.3.13"
-package_version = lib_version + '.post3'
+package_version = lib_version + '.post4'
 
 
 try:
@@ -41,9 +41,9 @@ class build_ext(_build_ext):
 if not _enet_files:
     import tarfile
     try:
-        import urllib as urllib_request
-    except ImportError:
         import urllib.request as urllib_request
+    except ImportError:
+        import urllib as urllib_request
 
     enet_dir = "enet-%s/" % lib_version
     enet_file = "enet-%s.tar.gz" % lib_version
