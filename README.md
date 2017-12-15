@@ -47,6 +47,18 @@ Once that is complete, install the new pyenet module:
 # python setup.py install
 ```
 
+## Packaging notes
+
+- update package version in `setup.py`
+- create a virtualenv (`python3 -m venv venv && source venv/bin/activate`)
+- install the requirements: `pip install -r dev-requirements.txt`
+- build the source dist: `python setup.py sdist`
+- make sure docker is installed and running and you're on a 64bit linux machine
+- build the binary dists: `./scripts/build_packages.sh`
+- upload to pypi: `twine upload dist/* wheelhouse/pyenet*`
+- commit, tag, push to github
+
+
 ## Usage
 
 Once you have installed pyenet, you only need to import the enet module to
