@@ -1,4 +1,4 @@
-include LICENSE ChangeLog README.md
+include LICENSE ChangeLog README.rst
 include enet.pyx
 
 include *.py

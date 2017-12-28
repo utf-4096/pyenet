@@ -15,14 +15,8 @@ lib_version = "1.3.13"
 package_version = lib_version + '.post6'
 
 
-try:
-   import pypandoc
-   long_description = pypandoc.convert_text(
-        re.sub(r'[^\x00-\x7F]+', ' ',
-            pypandoc.convert('README.md', 'markdown', format="markdown_github")), 'rst', format="markdown")
-except (IOError, ImportError):
-    print('pypandoc not available, using plain contents of readme')
-    long_description = re.sub(r'[^\x00-\x7F]+', ' ', open('README.md').read())
+with open('README.rst') as f:
+   long_description = re.sub(r'[^\x00-\x7F]+', ' ', f.read())
 
 
 from distutils.command.build_ext import build_ext as _build_ext
