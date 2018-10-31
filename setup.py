@@ -87,6 +87,7 @@ define_macros = [('HAS_POLL', None), ('HAS_FCNTL', None),
 libraries = []
 
 if sys.platform == 'win32':
+    define_macros.extend([('WIN32', None)])
     libraries.extend(['enet64', 'Winmm', 'ws2_32'])
 
 if sys.platform != 'darwin':
