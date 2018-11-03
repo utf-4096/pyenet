@@ -37,11 +37,6 @@ From pypi
 Manually from git
 ~~~~~~~~~~~~~~~~~
 
-Note: the enet sources are automatically downloaded from
-http://enet.bespin.org/ by ``setup.py``.
-
-This version of pyenet requires enet 1.3.
-
 Run the setup.py build:
 
 ::
