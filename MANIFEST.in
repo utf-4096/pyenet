@@ -3,4 +3,4 @@ include enet.pyx
 
 include *.py
 
-recursive-exclude enet *
+recursive-include enet *
