@@ -14,7 +14,7 @@ _enet_files = glob.glob("enet/*.c")
 source_files.extend(_enet_files)
 
 lib_version = "1.3.13"
-package_version = lib_version + '.post6'
+package_version = lib_version + '.post7'
 
 
 with open('README.rst') as f:
@@ -26,7 +26,9 @@ class build_ext(_build_ext):
     def run(self):
 
         from Cython.Build import cythonize
-        self.extensions = cythonize(self.extensions)
+        compiler_directives = {'language_level': 2}
+        self.extensions = cythonize(self.extensions,
+              compiler_directives=compiler_directives)
 
         _build_ext.run(self)
 
