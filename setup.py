@@ -14,7 +14,7 @@ _enet_files = glob.glob("enet/*.c")
 source_files.extend(_enet_files)
 
 lib_version = "1.3.14"
-package_version = lib_version + '.post7'
+package_version = lib_version # + '.post7'
 
 
 with open('README.rst') as f:
