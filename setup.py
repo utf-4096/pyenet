@@ -52,7 +52,6 @@ if sys.platform != 'darwin':
 ext_modules = [
     Extension(
         "enet",
-        extra_compile_args=["-O3"],
         sources=source_files,
         include_dirs=["enet/include/"],
         define_macros=define_macros,
