@@ -43,7 +43,7 @@ libraries = []
 
 if sys.platform == 'win32':
     define_macros.extend([('WIN32', None)])
-    libraries.extend(['enet64', 'Winmm', 'ws2_32'])
+    libraries.extend(['Winmm', 'ws2_32'])
 
 if sys.platform != 'darwin':
     define_macros.extend([('HAS_GETHOSTBYNAME_R', None),
